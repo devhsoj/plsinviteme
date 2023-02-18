@@ -16,6 +16,13 @@ export default function Home() {
     const [ characterApiResponse, setCharacterApiResponse ] = useState<ApiResponse<any>>();
 
     useEffect(() => { reloadList(); }, [listFilter]);
+    useEffect(() => {
+
+        const interval = setInterval(() => reloadList(), 5000);
+
+        return () => clearInterval(interval);
+
+    }, []);
 
     async function reloadList() {
         getCharacterListings(listFilter)
