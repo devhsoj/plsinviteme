@@ -8,11 +8,9 @@ export async function getRaiderIOSummary(character: CharacterAddRequest): Promis
 
     if (res.status !== 200) {
 
-        const data = await res.json();
-
         return {
             success: false,
-            message: data?.message ? data.message : 'Failed to reach Raider.io!'
+            message: 'Failed to reach Raider.io!'
         };
     }
 
