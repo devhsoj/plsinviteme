@@ -23,8 +23,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
     ) {
         return res.send({
             success: false,
-            message: 'Invalid Submission',
-            data: null
+            message: 'Invalid Submission'
         });
     }
 

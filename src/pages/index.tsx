@@ -29,7 +29,7 @@ export default function Home() {
     }
 
     async function addToList() {
-        setCharacterApiResponse({ success: true, message: '', data: null });
+        setCharacterApiResponse({ success: true });
 
         const response = await addCharacterToList(characterRegion, characterRealm, characterName, listFilter);
 
@@ -62,9 +62,10 @@ export default function Home() {
                                     <select
                                         className="dark text-white border border-white p-1 mr-2"
                                         onChange={e => setListFilter(e.currentTarget.value as ListFilter)}
+                                        defaultValue="M+"
                                     >
-                                        <option selected>M+</option>
-                                        <option>Raiding</option>
+                                        <option selected defaultValue="M+" value="M+">M+</option>
+                                        <option defaultValue="Raiding" value="Raiding">Raiding</option>
                                     </select>
                                     <select
                                         className="dark text-white border border-white p-1 mr-2"

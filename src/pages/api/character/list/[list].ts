@@ -16,8 +16,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
     if (!['M+', 'Raiding'].includes(list)) {
         return res.send({
             success: false,
-            message: 'Invalid List',
-            data: null
+            message: 'Invalid List'
         });
     }
 
