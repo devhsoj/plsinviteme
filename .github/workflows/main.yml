@@ -11,4 +11,4 @@ jobs:
       - name: Check Formatting
         run: |
           npm i
-          npx lint
+          npm run lint
