@@ -27,7 +27,7 @@ export async function addCharacterToList(
 }
 
 export async function getCharacterListings(list: ListFilter) {
-    const res = await fetch(`/api/character/list/${list}`);
+    const res = await fetch(`/api/character/list?type=${encodeURIComponent(list)}`);
     const data = await res.json() as ApiResponse<CharacterSummary[]>;
 
     return data;

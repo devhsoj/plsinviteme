@@ -11,7 +11,7 @@ export type CharacterAddRequest = {
 }
 
 export default async function handler(req: NextApiRequest, res: NextApiResponse) {
-    const list = req.query.list as string;
+    const list = req.query.type as string;
 
     await redis.set('WTF', JSON.stringify(req.query));
 
