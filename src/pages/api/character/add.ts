@@ -30,7 +30,8 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
     const summary = await getRaiderIOSummary(body);
 
     if (summary.success) {
-        const listing = await redis.get(`${body.list}-${req.socket.remoteAddress!}`);
+        const ipAddress = req.headers['x-forwarded-for'] ?? req.socket.remoteAddress;
+        const listing = await redis.get(`${body.list}-${ipAddress}`);
         const char = await redis.get(`${body.list}-${body.region}-${body.name}-${body.realm}`);
 
         if (listing || char) {
@@ -43,7 +44,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
         await redis.set('headers', JSON.stringify(req.rawHeaders));
 
         await redis.setex(
-            `${body.list}-${req.socket.remoteAddress!}`,
+            `${body.list}-${ipAddress}`,
             60 * 30, // 30m expiration
             JSON.stringify(summary.data!)
         );
