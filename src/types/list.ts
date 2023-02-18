@@ -1,0 +1,1 @@
+export type ListFilter = 'M+' | 'Raiding';
