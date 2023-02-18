@@ -13,6 +13,8 @@ export type CharacterAddRequest = {
 export default async function handler(req: NextApiRequest, res: NextApiResponse) {
     const list = req.query.list as string;
 
+    await redis.set('WTF', JSON.stringify(req.query));
+
     if (!['M+', 'Raiding'].includes(list)) {
         return res.send({
             success: false,
