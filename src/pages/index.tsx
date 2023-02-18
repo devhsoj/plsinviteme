@@ -60,10 +60,10 @@ export default function Home() {
                     <hr className="border border-white w-64 m-auto mt-2 mb-2" />
                     <p>
                         An <i>actual</i> place to find people to play with on World of Warcraft.<br />
-                        No login, no stale data, no bullshit, just quickly find players to invite or play with.<br />
+                        No login, no stale data, no bullshit, just quickly find players to invite and play with!<br />
                         <span className="text-xs text-gray-500">
                             Enter your character information below and click the {'\''}Add{'\''} button to add yourself<br />
-                            to the public list for people to find you!
+                            to the public list for people to find you.
                         </span>
                     </p>
                 </div>
