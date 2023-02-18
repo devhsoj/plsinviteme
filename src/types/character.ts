@@ -145,20 +145,110 @@ export const IOColors = {
     200: '#ffffff',
 };
 
-export const ClassColors: Record<string, string> = {
-    'Death Knight': '#C41E3A',
-    'Demon Hunter': '#A330C9',
-    Druid: '#FF7C0A',
-    Evoker: '#33937F',
-    Hunter: '#AAD372',
-    Mage: '#3FC7EB',
-    Monk: '#00FF98',
-    Paladin: '#F48CBA',
-    Priest: '#FFFFFF',
-    Rogue: '#FFF468',
-    Shaman: '#0070DD',
-    Warlock: '#8788EE',
-    Warrior: '#C69B6D'
+export const Classes: Record<string, { color: string, specs: string[] }> = {
+    'Death Knight': {
+        color: '#c41e3a',
+        specs: [
+            'Unholy',
+            'Frost',
+            'Blood'
+        ]
+    },
+    'Demon Hunter': {
+        color: '#a330c9',
+        specs: [
+            'Havoc',
+            'Vengeance'
+        ]
+    },
+    Druid: {
+        color:'#ff7c0a',
+        specs: [
+            'Balance',
+            'Feral',
+            'Restoration',
+            'Guardian'
+        ]
+    },
+    Evoker: {
+        color: '#33937f',
+        specs: [
+            'Devastation',
+            'Preservation'
+        ]
+    },
+    Hunter: {
+        color: '#aad372',
+        specs: [
+            'Marksmanship',
+            'Beast Mastery',
+            'Survival'
+        ]
+    },
+    Mage: {
+        color: '#3fc7eb',
+        specs: [
+            'Arcane',
+            'Frost',
+            'Fire'
+        ]
+    },
+    Monk: {
+        color: '#00ff98',
+        specs: [
+            'Brewmaster',
+            'Mistweaver',
+            'Windwalker'
+        ]
+    },
+    Paladin: {
+        color: '#f48cba',
+        specs: [
+            'Retribution',
+            'Holy',
+            'Protection'
+        ]
+    },
+    Priest: {
+        color: '#ffffff',
+        specs: [
+            'Shadow',
+            'Holy',
+            'Disicipline'
+        ]
+    },
+    Rogue: {
+        color: '#fff468',
+        specs: [
+            'Outlaw',
+            'Subletly',
+            'Assassination'
+        ]
+    },
+    Shaman: {
+        color: '#0070d',
+        specs: [
+            'Enhancement',
+            'Elemental',
+            'Restoration'
+        ]
+    },
+    Warlock: {
+        color: '#8788ee',
+        specs: [
+            'Destruction',
+            'Demonology',
+            'Affliction'
+        ]
+    },
+    Warrior: {
+        color: '#c69b6d',
+        specs: [
+            'Arms',
+            'Fury',
+            'Protection'
+        ]
+    }
 };
 
 export type CharacterSummary = {

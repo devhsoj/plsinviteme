@@ -16,6 +16,7 @@ export async function getRaiderIOSummary(character: CharacterAddRequest): Promis
 
     const data = await res.json() as RaiderIoData;
     const ilvlColor = RarityColors[Object.values(data.gear.items)
+        .filter(item => item.bonuses.length > 0)
         .map(item => item.item_quality)
         .sort((a,b) => a - b)[0] as Rarity];
 

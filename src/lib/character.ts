@@ -1,4 +1,4 @@
-import { CharacterSummary, ClassColors, IOColors, Region } from '@/types/character';
+import { CharacterSummary, Classes, IOColors, Region } from '@/types/character';
 import { ApiResponse } from '@/backend/types/api';
 import { ListFilter } from '@/types/list';
 
@@ -37,7 +37,7 @@ export function getStylingForSummary(summary: CharacterSummary) {
 
     const ioEntries = Object.entries(IOColors);
 
-    const classColor = ClassColors[summary.class] ?? '#ffffff';
+    const classColor = Classes[summary.class]?.color ?? '#ffffff';
     const specIconUri = `/static/images/${summary.spec.toLowerCase()}-${summary.class.replaceAll(' ', '-').toLowerCase()}.webp`;
 
     let ioColor = '#ffffff';
