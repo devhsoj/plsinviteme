@@ -3,6 +3,7 @@ import { CharacterSummary, Region } from '@/types/character';
 import { ApiResponse } from '@/backend/types/api';
 import { useEffect, useState } from 'react';
 import { ListFilter } from '@/types/list';
+import Image from 'next/image';
 import Head from 'next/head';
 
 export default function Home() {
@@ -131,15 +132,28 @@ export default function Home() {
                             <tbody>
                                 {
                                     listings.map(listing => (
-                                        <tr key={listing.characterNameSummary}>
-                                            <th><img src={`/static/images/${listing.role}.webp`} /></th>
+                                        <tr key={listing.name}>
+                                            <th>
+                                                <Image
+                                                    src={getStylingForSummary(listing).specIconUri}
+                                                    alt={listing.spec}
+                                                    width={24}
+                                                    height={24}
+                                                />
+                                            </th>
                                             <td style={{ color: listing.ilvlColor }}>{listing.ilvl}</td>
                                             <td style={{ color: getStylingForSummary(listing).ioColor }}>{listing.io}</td>
                                             <td>{listing.raidSummary}</td>
-                                            <td>
-                                                {listing.characterNameSummary}
-                                                <br/>
-                                                <span className="text-xs text-gray-500 cursor-pointer hover hover:underline" onClick={() => navigator.clipboard.writeText(listing.characterNameSummary.split(' ')[1])}>Click to Copy</span>
+                                            <td className="grid place-items-center">
+                                                <span
+                                                    className="hover hover:underline hover:cursor-pointer"
+                                                    style={{ color: getStylingForSummary(listing).classColor }}
+                                                    onClick={() => {
+                                                        navigator.clipboard.writeText(listing.name + '-' + listing.realm);
+                                                    }}
+                                                >
+                                                    {listing.name}-{listing.realm}
+                                                </span>
                                             </td>
                                             <td><a className="underline text-blue-400" href={listing.raiderIoUrl}>{listing.raiderIoUrl}</a></td>
                                             <td><a className="underline text-blue-400" href={listing.warcraftLogsUrl}>{listing.warcraftLogsUrl}</a></td>

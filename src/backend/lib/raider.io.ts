@@ -24,7 +24,12 @@ export async function getRaiderIOSummary(character: CharacterAddRequest): Promis
     return {
         success: true,
         data: {
+            name: character.name,
+            realm: character.realm,
+            region: character.region,
             role: data.active_spec_role.toLowerCase() as Role,
+            class: data.class,
+            spec: data.active_spec_name,
             list: character.list,
             timestamp: Date.now(),
             io: data.mythic_plus_scores.all,
@@ -32,8 +37,7 @@ export async function getRaiderIOSummary(character: CharacterAddRequest): Promis
             ilvlColor,
             raidSummary: Object.values(data.raid_progression)[0]?.summary ?? 'No Raid Data!',
             raiderIoUrl: data.profile_url,
-            warcraftLogsUrl: `https://www.warcraftlogs.com/character/${character.region}/${character.realm}/${character.name}`.toLowerCase(),
-            characterNameSummary: `(${character.region}) ${character.name}-${character.realm}`
+            warcraftLogsUrl: `https://www.warcraftlogs.com/character/${character.region}/${character.realm}/${character.name}`.toLowerCase()
         }
     };
 }
