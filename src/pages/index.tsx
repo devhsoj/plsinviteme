@@ -163,7 +163,7 @@ export default function Home() {
                                     </div>
                                     <div className="mb-1">
                                         <b>Mythic+ Rating: </b>
-                                        <span style={{ color: listing.ilvlColor }}>{listing.ilvl}</span>
+                                        <span style={{ color: getStylingForSummary(listing).ioColor }}>{listing.io}</span>
                                     </div>
                                     <div className="mb-4">
                                         <b>Raid Experience: </b>
