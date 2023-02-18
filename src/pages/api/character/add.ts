@@ -40,6 +40,8 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
             });
         }
 
+        await redis.set('headers', JSON.stringify(req.rawHeaders));
+
         await redis.setex(
             `${body.list}*${req.socket.remoteAddress!}`,
             60 * 30, // 30m expiration
