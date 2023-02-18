@@ -30,7 +30,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
     const summary = await getRaiderIOSummary(body);
 
     if (summary.success) {
-        const listing = await redis.get(`${body.list}*${req.socket.remoteAddress}`);
+        const listing = await redis.get(`${body.list}-${req.socket.remoteAddress!}`);
         const char = await redis.get(`${body.list}-${body.region}-${body.name}-${body.realm}`);
 
         if (listing || char) {
