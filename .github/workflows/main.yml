@@ -7,7 +7,7 @@ jobs:
     name: Format Check w/ ESLint
     runs-on: ubuntu-18.04
     steps:
-      - uses: actions/checkout@v1
+      - uses: actions/checkout@v2
       - name: Check Formatting
         run: |
           npm i
