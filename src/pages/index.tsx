@@ -1,5 +1,5 @@
 import { addCharacterToList, getCharacterListings, getStylingForSummary } from '@/lib/character';
-import { CharacterSummary, IOColors, Region } from '@/types/character';
+import { CharacterSummary, Region } from '@/types/character';
 import { ApiResponse } from '@/backend/types/api';
 import { useEffect, useState } from 'react';
 import { ListFilter } from '@/types/list';

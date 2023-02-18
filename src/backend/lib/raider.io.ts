@@ -1,5 +1,5 @@
-import { CharacterAddRequest } from '@/pages/api/character/add';
 import { CharacterSummary, Rarity, RarityColors, Role } from '@/types/character';
+import { CharacterAddRequest } from '@/pages/api/character/add';
 import { RaiderIoData } from '../types/raider.io';
 import { ApiResponse } from '../types/api';
 
