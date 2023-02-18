@@ -12,6 +12,9 @@ export default function Home() {
     const [ characterRegion, setCharacterRegion ] = useState<Region>('us');
     const [ listings, setListings ] = useState<CharacterSummary[]>([]);
     const [ listFilter, setListFilter ] = useState<ListFilter>('M+');
+
+    console.log(listFilter);
+
     const [ characterApiResponse, setCharacterApiResponse ] = useState<ApiResponse<any>>();
 
     useEffect(() => { reloadList(); }, [listFilter]);
