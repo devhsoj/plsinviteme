@@ -16,7 +16,7 @@ export default function Home() {
     const [ characterRegion, setCharacterRegion ] = useState<Region>('us');
     const [ listings, setListings ] = useState<CharacterSummary[]>([]);
     const [ filteredListings, setFilteredListings ] = useState<CharacterSummary[]>([]);
-    const [ listFilter, setListFilter ] = useState<ListFilter>('M+');
+    const [ listFilter, setListFilter ] = useState<ListFilter>('Mythic+');
 
     const [ roleFilter, setRoleFilter ] = useState('');
     const [ classFilter, setClassFilter ] = useState('');
@@ -99,9 +99,9 @@ export default function Home() {
                         <select
                             className="dark text-white border border-white p-1 mr-2"
                             onChange={e => setListFilter(e.currentTarget.value as ListFilter)}
-                            defaultValue="M+"
+                            defaultValue="Mythic+"
                         >
-                            <option selected defaultValue="M+" value="M+">M+</option>
+                            <option selected defaultValue="Mythic+" value="Mythic+">Mythic+</option>
                             <option defaultValue="Raiding" value="Raiding">Raiding</option>
                             <option defaultValue="Levelling" value="Levelling">Levelling</option>
                             <option defaultValue="Farming" value="Farming">Farming</option>
@@ -240,10 +240,12 @@ export default function Home() {
                                 <select
                                     className="dark text-white border border-white p-1 w-1/4"
                                     onChange={e => setListFilter(e.currentTarget.value as ListFilter)}
-                                    defaultValue="M+"
+                                    defaultValue="Mythic+"
                                 >
-                                    <option selected defaultValue="M+" value="M+">M+</option>
+                                    <option selected defaultValue="Mythic+" value="Mythic+">Mythic+</option>
                                     <option defaultValue="Raiding" value="Raiding">Raiding</option>
+                                    <option defaultValue="Levelling" value="Levelling">Levelling</option>
+                                    <option defaultValue="Farming" value="Farming">Farming</option>
                                 </select>
                             </div>
                         </div>

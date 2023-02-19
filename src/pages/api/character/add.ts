@@ -16,7 +16,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
 
     if (
         !body?.list
-        || !['M+', 'Raiding'].includes(body?.list)
+        || !['Mythic+', 'Raiding', 'Levelling', 'Farming'].includes(body?.list)
         || !body?.region
         || !body?.realm
         || !body?.name

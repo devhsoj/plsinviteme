@@ -13,7 +13,7 @@ export type CharacterAddRequest = {
 export default async function handler(req: NextApiRequest, res: NextApiResponse) {
     const list = req.query.type as string;
 
-    if (!['M+', 'Raiding'].includes(list)) {
+    if (!['Mythic+', 'Raiding', 'Levelling', 'Farming'].includes(list)) {
         return res.send({
             success: false,
             message: 'Invalid List'
