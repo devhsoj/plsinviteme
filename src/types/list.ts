@@ -1,1 +1,1 @@
-export type ListFilter = 'M+' | 'Raiding';
+export type ListFilter = 'M+' | 'Raiding' | 'Levelling' | 'Farming';

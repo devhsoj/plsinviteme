@@ -143,6 +143,7 @@ export const IOColors = {
     250: '#f3ffee',
     225: '#f9fff6',
     200: '#ffffff',
+    0: '#ffffff'
 };
 
 export const Classes: Record<string, { color: string, specs: string[] }> = {

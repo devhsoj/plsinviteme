@@ -17,12 +17,45 @@ export default function Home() {
     const [ listings, setListings ] = useState<CharacterSummary[]>([]);
     const [ filteredListings, setFilteredListings ] = useState<CharacterSummary[]>([]);
     const [ listFilter, setListFilter ] = useState<ListFilter>('M+');
+
+    const [ roleFilter, setRoleFilter ] = useState('');
     const [ classFilter, setClassFilter ] = useState('');
+    const [ specFilter, setSpecFilter ] = useState('');
+    const [ iLvlFilter, setILvlFilter ] = useState(0);
+    const [ ratingFilter, setRatingFilter ] = useState(0);
 
     const [ characterApiResponse, setCharacterApiResponse ] = useState<ApiResponse<any>>();
 
+    function applyFilters() {
+        setFilteredListings(listings.filter(listing => {
+            return (
+                listing.role.includes(roleFilter)
+                && listing.class.includes(classFilter)
+                && listing.spec.includes(specFilter)
+                && listing.ilvl > iLvlFilter
+                && listing.io > ratingFilter
+            );
+        }));
+    }
+
     useEffect(() => { reloadList(); }, [listFilter]);
-    useEffect(() => { setFilteredListings(listings); }, [listings]);
+    useEffect(() => { applyFilters(); }, [listings]);
+
+    useEffect(() => { applyFilters(); }, [
+        roleFilter,
+        classFilter,
+        specFilter,
+        iLvlFilter,
+        ratingFilter
+    ]);
+
+    useEffect(() => {
+
+        const interval = setInterval(() => reloadList(), 5000);
+
+        return () => clearInterval(interval);
+
+    }, []);
 
     async function reloadList() {
         getCharacterListings(listFilter)
@@ -60,16 +93,9 @@ export default function Home() {
                     <p>
                         An <i>actual</i> place to find people to play with on World of Warcraft.<br />
                         No login, no stale data, no bullshit, just quickly find players to invite and play with!<br />
-                        <span className="text-xs text-gray-500">
-                            Click the {'\''}Advertise{'\''} button and enter your character information, then click the {'\''}Submit{'\''} button to add your character to the public list.
-                        </span>
                     </p>
                     <div>
-                        <button data-modal-target="advertise-modal" data-modal-toggle="advertise-modal" className="block text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-md px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800 w-auto m-auto mt-4" type="button">
-                            Advertise
-                        </button>
-                    </div>
-                    <div className="mt-4">
+                        <h1 className="text-2xl font-extrabold p-4" style={{ textShadow: 'blue 1px 0 10px' }}>Filter</h1>
                         <select
                             className="dark text-white border border-white p-1 mr-2"
                             onChange={e => setListFilter(e.currentTarget.value as ListFilter)}
@@ -77,11 +103,13 @@ export default function Home() {
                         >
                             <option selected defaultValue="M+" value="M+">M+</option>
                             <option defaultValue="Raiding" value="Raiding">Raiding</option>
+                            <option defaultValue="Levelling" value="Levelling">Levelling</option>
+                            <option defaultValue="Farming" value="Farming">Farming</option>
                         </select>
                         <select
                             className="dark text-white border border-white p-1 mr-2"
-                            onChange={e => setFilteredListings(listings.filter(listing => listing.role.includes(e.target.value)))}
-                            defaultValue={0}
+                            onChange={e => setRoleFilter(e.target.value)}
+                            defaultValue=""
                         >
                             <option selected defaultValue="" value="">Role</option>
                             <option className="text-amber-500" defaultValue="tank" value="tank">
@@ -96,11 +124,8 @@ export default function Home() {
                         </select>
                         <select
                             className="dark text-white border border-white p-1 mr-2"
-                            onChange={e => {
-                                setFilteredListings(listings.filter(listing => listing.class.includes(e.target.value)));
-                                setClassFilter(e.target.value);
-                            }}
-                            defaultValue={0}
+                            onChange={e => setClassFilter(e.target.value)}
+                            defaultValue=""
                         >
                             <option selected defaultValue="" value="">Class</option>
                             {
@@ -120,12 +145,8 @@ export default function Home() {
                             classFilter ? (
                                 <select
                                     className="dark text-white border border-white p-1 mr-2"
-                                    onChange={e => {
-                                        setFilteredListings(listings.filter(
-                                            listing => listing.spec.includes(e.target.value) && listing.class.includes(classFilter)
-                                        ));
-                                    }}
-                                    defaultValue={0}
+                                    onChange={e => setSpecFilter(e.target.value)}
+                                    defaultValue=""
                                 >
                                     <option selected defaultValue="" value="">Specialization</option>
                                     {
@@ -145,7 +166,7 @@ export default function Home() {
                         }
                         <select
                             className="dark text-white border border-white p-1 mr-2"
-                            onChange={e => setFilteredListings(listings.filter(listing => listing.ilvl > parseInt(e.target.value ?? '0')))}
+                            onChange={e => setILvlFilter(parseInt(e.target.value ?? '0'))}
                             defaultValue={0}
                         >
                             <option selected defaultValue={0} value={0}>Minimum iLvl</option>
@@ -164,8 +185,8 @@ export default function Home() {
                             <option style={{ color: '#ffffff' }} defaultValue={340} value={340}>330+</option>
                         </select>
                         <select
-                            className="dark text-white border border-white p-1"
-                            onChange={e => setFilteredListings(listings.filter(listing => listing.io > parseInt(e.target.value ?? '0')))}
+                            className="dark text-white border border-white p-1 mr-4"
+                            onChange={e => setRatingFilter(parseInt(e.target.value ?? '0'))}
                             defaultValue={0}
                         >
                             <option selected defaultValue={0} value={0}>Minimum Rating</option>
@@ -197,9 +218,19 @@ export default function Home() {
                             <option style={{ color: '#f9fff6' }} defaultValue={225} value={225}>225+</option>
                             <option style={{ color: '#ffffff' }} defaultValue={200} value={200}>200+</option>
                         </select>
+                        <span className="text-sm underline text-blue-400 cursor-pointer mr-2" onClick={() => {
+                            reloadList();
+                            applyFilters();
+                        }}>Refresh</span>
+                    </div>
+                    <div>
+                        <span className="text-sm text-gray-500">Results are refreshed automatically every 5 seconds, and your filters will apply to all new advertisements!</span>
+                        <button data-modal-target="advertise-modal" data-modal-toggle="advertise-modal" className="block text-white bg-blue-800 hover:bg-blue-900 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-md px-2.5 py-2.5 text-center dark:bg-blue-800 dark:hover:bg-blue-900 dark:focus:ring-blue-900 w-auto m-auto mt-4" type="button">
+                            Advertise Your Character
+                        </button>
                     </div>
                 </div>
-                <div className="w-full text-center mt-4">
+                <div className="w-full text-center mt-2">
                     <Modal id="advertise-modal" onSubmit={addToList}>
                         <div className="grid grid-cols-1">
                             <div>
@@ -264,7 +295,7 @@ export default function Home() {
                     </Modal>
                     <div className="grid md:grid-cols-3 space-x-4 sm:grid-rows-1">
                         {
-                            filteredListings.map(listing => (
+                            listings.length === 0 ? 'No Characters Advertised!' : filteredListings.map(listing => (
                                 <div key={listing.name} className="p-4 overflow-auto">
                                     <div className="mb-1">
                                         <Icon
