@@ -293,7 +293,7 @@ export default function Home() {
                             ) : ''}
                         </div>
                     </Modal>
-                    <div className="grid md:grid-cols-3 space-x-4 sm:grid-rows-1">
+                    <div className={listings.length === 0 ? '' : 'grid md:grid-cols-3 space-x-4 sm:grid-rows-1'}>
                         {
                             listings.length === 0 ? 'No Characters Advertised!' : filteredListings.map(listing => (
                                 <div key={listing.name} className="p-4 overflow-auto">
