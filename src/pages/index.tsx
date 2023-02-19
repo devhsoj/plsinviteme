@@ -340,8 +340,8 @@ export default function Home() {
                                         <a className="underline text-blue-400" href={listing.warcraftLogsUrl}>{listing.warcraftLogsUrl}</a>
                                     </div>
                                     <div className="text-gray-500 mt-2 mb-2 text-sm">
-                                        {Math.floor((now - listing.timestamp) / 1000 / 60)} m ago
-                                        (expires in {30 - Math.floor((now - listing.timestamp) / 1000 / 60)} m)
+                                        {Math.floor((now - listing.timestamp) / 1000 / 60)}m ago
+                                        (expires in {30 - Math.floor((now - listing.timestamp) / 1000 / 60)}m)
                                     </div>
                                 </div>
                             ))
