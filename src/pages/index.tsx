@@ -58,7 +58,7 @@ export default function Home() {
 
     useEffect(() => {
 
-        const interval = setInterval(() => {reloadList(); console.log(filteredListings);}, 5000);
+        const interval = setInterval(() => reloadList(), 5000);
 
         return () => clearInterval(interval);
 
