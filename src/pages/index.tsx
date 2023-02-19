@@ -8,6 +8,12 @@ import dynamic from 'next/dynamic';
 import Head from 'next/head';
 
 const Icon = dynamic(() => import('@/components/Icon'), { ssr: false });
+const gridStyles: Record<number, string> = {
+    0: '',
+    1: 'grid lg:grid-cols-1 md:grid-cols-1 sm:grid-rows-1 space-x-4',
+    2: 'grid lg:grid-cols-2 md:grid-cols-2 sm:grid-rows-1 space-x-4',
+    3: 'grid lg:grid-cols-3 md:grid-cols-2 sm:grid-rows-1 space-x-4'
+};
 
 export default function Home() {
 
@@ -295,7 +301,7 @@ export default function Home() {
                             ) : ''}
                         </div>
                     </Modal>
-                    <div className={listings.length === 0 ? '' : 'grid lg:grid-cols-3 md:grid-cols-2 sm:grid-rows-1 space-x-4'}>
+                    <div className={listings.length > 3 ? gridStyles[3] : gridStyles[listings.length]}>
                         {
                             listings.length === 0 ? 'No Characters Advertised!' : filteredListings.map(listing => (
                                 <div key={listing.name} className="p-4 overflow-auto">
@@ -306,7 +312,7 @@ export default function Home() {
                                             alt={listing.spec}
                                         />
                                         <span
-                                            className="hover hover:underline hover:cursor-pointer text-lg"
+                                            className="hover hover:underline hover:cursor-pointer text-lg font-bold"
                                             style={{ color: getStylingForSummary(listing).classColor }}
                                             onClick={() => {
                                                 navigator.clipboard.writeText(listing.name + '-' + listing.realm);
