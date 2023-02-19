@@ -34,6 +34,8 @@ export default function Home() {
 
     function applyFilters() {
         setFilteredListings(listings.filter(listing => {
+            if (!classFilter && specFilter) setSpecFilter('');
+
             return (
                 listing.role.includes(roleFilter)
                 && listing.class.includes(classFilter)
