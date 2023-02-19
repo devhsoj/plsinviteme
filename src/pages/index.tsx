@@ -40,16 +40,15 @@ export default function Home() {
                 listing.role.includes(roleFilter)
                 && listing.class.includes(classFilter)
                 && listing.spec.includes(specFilter)
-                && listing.ilvl > iLvlFilter
-                && listing.io > ratingFilter
+                && listing.ilvl >= iLvlFilter
+                && listing.io >= ratingFilter
             );
         }));
     }
 
     useEffect(() => { reloadList(); }, [listFilter]);
-    useEffect(() => { applyFilters(); }, [listings]);
-
     useEffect(() => { applyFilters(); }, [
+        listings,
         roleFilter,
         classFilter,
         specFilter,
@@ -59,7 +58,7 @@ export default function Home() {
 
     useEffect(() => {
 
-        const interval = setInterval(() => reloadList(), 5000);
+        const interval = setInterval(() => {reloadList(); console.log(filteredListings);}, 5000);
 
         return () => clearInterval(interval);
 
@@ -236,13 +235,13 @@ export default function Home() {
                         <button data-modal-target="advertise-modal" data-modal-toggle="advertise-modal" className="block text-white bg-blue-800 hover:bg-blue-900 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-md px-2.5 py-2.5 text-center dark:bg-blue-800 dark:hover:bg-blue-900 dark:focus:ring-blue-900 w-auto m-auto mt-4" type="button">
                             Advertise Your Character
                         </button>
-                        <div>
-                            {characterApiResponse ? (
-                                <span className={characterApiResponse.success ? 'text-white' : 'text-red-500'}>
-                                    <i>{characterApiResponse.message}</i>
-                                </span>
-                            ) : ''}
-                        </div>
+                    </div>
+                    <div>
+                        {characterApiResponse ? (
+                            <span className={characterApiResponse.success ? 'text-white' : 'text-red-500'}>
+                                <i>{characterApiResponse.message}</i>
+                            </span>
+                        ) : ''}
                     </div>
                 </div>
                 <div className="w-full text-center mt-2">
