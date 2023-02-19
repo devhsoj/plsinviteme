@@ -168,7 +168,7 @@ export default function Home() {
                             onChange={e => setFilteredListings(listings.filter(listing => listing.io > parseInt(e.target.value ?? '0')))}
                             defaultValue={0}
                         >
-                            <option selected defaultValue={0} value={0}>Minimum IO</option>
+                            <option selected defaultValue={0} value={0}>Minimum Rating</option>
                             <option style={{ color: '#ff8000' }} defaultValue={3350} value={3350}>3350+</option>
                             <option style={{ color: '#f9763b' }} defaultValue={3190} value={3190}>3190+</option>
                             <option style={{ color: '#f36b5a' }} defaultValue={3070} value={3070}>3070+</option>
