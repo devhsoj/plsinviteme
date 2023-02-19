@@ -293,7 +293,7 @@ export default function Home() {
                             ) : ''}
                         </div>
                     </Modal>
-                    <div className={listings.length === 0 ? '' : `grid md:grid-cols-${[1, 2].includes(listings.length) ? '1' : '3'} space-x-4 sm:grid-rows-1`}>
+                    <div className={listings.length === 0 ? '' : 'grid lg:grid-cols-3 md:grid-cols-2 sm:grid-rows-1 space-x-4'}>
                         {
                             listings.length === 0 ? 'No Characters Advertised!' : filteredListings.map(listing => (
                                 <div key={listing.name} className="p-4 overflow-auto">
@@ -343,7 +343,6 @@ export default function Home() {
                                         {Math.floor((now - listing.timestamp) / 1000 / 60)} m ago
                                         (expires in {30 - Math.floor((now - listing.timestamp) / 1000 / 60)} m)
                                     </div>
-                                    <hr className="mt-4 border border-slate-700" />
                                 </div>
                             ))
                         }
