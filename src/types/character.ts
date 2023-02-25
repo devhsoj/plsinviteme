@@ -227,7 +227,7 @@ export const Classes: Record<string, { color: string, specs: string[] }> = {
         ]
     },
     Shaman: {
-        color: '#0070d',
+        color: '#0070dd',
         specs: [
             'Enhancement',
             'Elemental',
